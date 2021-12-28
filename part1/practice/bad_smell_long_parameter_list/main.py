@@ -11,40 +11,23 @@
 
 
 class Unit:
-    def move(self, field, x_coord, y_coord, direction, is_fly, crawl, speed = 1):
-
-        if is_fly and crawl:
-            raise ValueError('Рожденный ползать летать не должен!')
-
-        if is_fly:
+    def move(self, field, coord: list, direction, type_move: str, speed=1):
+        x, y = coord
+        new_y = y
+        new_x = x
+        if type_move == "fly":
             speed *= 1.2
-            if direction == 'UP':
-                new_y = y_coord + speed
-                new_x = x_coord
-            elif direction == 'DOWN':
-                new_y = y_coord - speed
-                new_x = x_coord
-            elif direction == 'LEFT':
-                new_y = y_coord
-                new_x = x_coord - speed
-            elif direction == 'RIGTH':
-                new_y = y_coord
-                new_x = x_coord + speed
-        if crawl:
+        elif type_move == "crawl":
             speed *= 0.5
-            if direction == 'UP':
-                new_y = y_coord + speed
-                new_x = x_coord
-            elif direction == 'DOWN':
-                new_y = y_coord - speed
-                new_x = x_coord
-            elif direction == 'LEFT':
-                new_y = y_coord
-                new_x = x_coord - speed
-            elif direction == 'RIGTH':
-                new_y = y_coord
-                new_x = x_coord + speed
+        if direction == 'UP':
+            new_y = y + speed
+        elif direction == 'DOWN':
+            new_y = y - speed
+        elif direction == 'LEFT':
+            new_x = x - speed
+        elif direction == 'RIGTH':
+            new_x = x + speed
 
-            field.set_unit(x=new_x, y=new_y, unit=self)
+        field.set_unit(x=new_x, y=new_y, unit=self)
 
 #     ...
